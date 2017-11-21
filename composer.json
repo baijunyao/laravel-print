@@ -1,0 +1,21 @@
+{
+    "name": "baijunyao/laravel-print",
+    "description": "print",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "baijunyao",
+            "email": "baijunyao@baijunyao.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Baijunyao\\LaravelPrint\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
+}
