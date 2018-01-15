@@ -28,6 +28,7 @@ if (!function_exists('p')) {
         }
         $str .= $show_data;
         $str .= '</pre>';
+        http_response_code(500);
         echo $str;
     }
 }
