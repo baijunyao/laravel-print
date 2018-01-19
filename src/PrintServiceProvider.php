@@ -18,7 +18,7 @@ class PrintServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        VarDumper::setHandler(function ($var) use($toArray) {
+        VarDumper::setHandler(function ($var) {
             $cloner = new VarCloner();
             $dumper = 'cli' === PHP_SAPI ? new CliDumper() : new HtmlDumper();
             $hint = '';
