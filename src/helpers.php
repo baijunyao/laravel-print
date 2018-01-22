@@ -1,5 +1,10 @@
 <?php
 
+use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
+use Symfony\Component\VarDumper\Dumper\HtmlDumper;
+
 if (!function_exists('p')) {
     // 传递数据以易于阅读的样式格式化后输出
     function p($data, $toArray = true)
