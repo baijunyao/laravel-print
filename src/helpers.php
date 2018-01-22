@@ -9,7 +9,7 @@ if (!function_exists('p')) {
     // 传递数据以易于阅读的样式格式化后输出
     function p($data, $toArray = true)
     {
-       VarDumper::setHandler(function ($var) {
+       VarDumper::setHandler(function ($var) use($toArray) {
             $cloner = new VarCloner();
             $dumper = 'cli' === PHP_SAPI ? new CliDumper() : new HtmlDumper();
             $hint = '';
@@ -48,8 +48,9 @@ if (!function_exists('p')) {
                 '</pre><script>Sfdump(%s)</script>'
             );
             $dumper->dump($cloner->cloneVar($var));
-
         });
+        // 设置response为500以处理ajax下无法预览结构的问题
+        http_response_code(500);
         dump($data);
     }
 }
