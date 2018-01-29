@@ -26,7 +26,7 @@ if (!function_exists('p')) {
             }
 
             $dumper->setStyles([
-                'default' => 'background-color:#18171B; color:#FF8400; line-height:1.2em; font:13px Menlo, Monaco, Consolas, monospace; word-wrap: break-word; white-space: pre-wrap; position:relative; z-index:99999; word-break: break-all',
+                'default' => 'background-color:#18171B; color:#FF8400; line-height:1.2em; font:13px Menlo, Monaco, Consolas, monospace; word-wrap: break-word; white-space: pre-wrap; position:relative; z-index:9999; word-break: break-all',
                 'num' => 'font-weight:bold; color:#1299DA',
                 'const' => 'font-weight:bold',
                 'str' => 'font-weight:bold; color:#56DB3A',
