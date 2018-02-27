@@ -4,25 +4,34 @@ use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use Illuminate\Support\Collection;
+use App\Models\Base;
+use Maatwebsite\Excel\Readers\LaravelExcelReader;
 
 if (!function_exists('p')) {
     // 传递数据以易于阅读的样式格式化后输出
     function p($data, $toArray = true)
     {
-       VarDumper::setHandler(function ($var) use($toArray) {
+        VarDumper::setHandler(function ($var) use($toArray) {
             $cloner = new VarCloner();
             $dumper = 'cli' === PHP_SAPI ? new CliDumper() : new HtmlDumper();
             $hint = '';
 
-            if (is_object($var) && in_array(get_parent_class($var), ['Illuminate\Support\Collection', 'App\Models\Base']) && $toArray) {
-                // 把一些集合转成数组形式来查看
-                $hint = '<pre>下面是一个使用->toArray()方法转成的数组</pre>';
-                $var = $var->toArray();
-            }
+            // 需要转成数组的类
+            $collect = [
+                Collection::class,
+                Base::class,
+                LaravelExcelReader::class
+            ];
 
-            if (is_object($var) && in_array(get_class($var), ['Maatwebsite\Excel\Readers\LaravelExcelReader']) && $toArray) {
-                // 把一些集合转成数组形式来查看
-                $var = $var->toArray();
+            if (is_object($var) && $toArray) {
+                $className = get_class($var);
+                $parentClassName = get_parent_class($var);
+                if (in_array($className, $collect) || in_array($parentClassName, $collect)) {
+                    // 把集合转成数组形式查看
+                    $hint = '<pre>下面是一个使用->toArray()方法转成的数组</pre>';
+                    $var = $var->toArray();
+                }
             }
 
             $dumper->setStyles([
