@@ -1,6 +1,7 @@
 {
     "name": "baijunyao/laravel-print",
-    "description": "print",
+    "keywords": ["laravel", "print", "dump"],
+    "description": "laravel print",
     "type": "library",
     "license": "MIT",
     "authors": [
