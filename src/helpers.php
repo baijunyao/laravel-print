@@ -3,7 +3,6 @@
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
-use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 use Illuminate\Support\Collection;
 use App\Models\Base;
 use Maatwebsite\Excel\Readers\LaravelExcelReader;
@@ -12,9 +11,13 @@ if (!function_exists('p')) {
     // 传递数据以易于阅读的样式格式化后输出
     function p($data, $toArray = true)
     {
+        if (app()->runningInConsole()) {
+            return dump($data);
+        }
+
         VarDumper::setHandler(function ($var) use($toArray) {
             $cloner = new VarCloner();
-            $dumper = 'cli' === PHP_SAPI ? new CliDumper() : new HtmlDumper();
+            $dumper = new CliDumper();
             $hint = '';
 
             // 需要转成数组的类
