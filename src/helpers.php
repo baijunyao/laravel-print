@@ -2,7 +2,7 @@
 
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
-use Symfony\Component\VarDumper\Dumper\CliDumper;
+use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 use Illuminate\Support\Collection;
 use App\Models\Base;
 use Maatwebsite\Excel\Readers\LaravelExcelReader;
@@ -17,7 +17,7 @@ if (!function_exists('p')) {
 
         VarDumper::setHandler(function ($var) use($toArray) {
             $cloner = new VarCloner();
-            $dumper = new CliDumper();
+            $dumper = new HtmlDumper();
             $hint = '';
 
             // 需要转成数组的类
